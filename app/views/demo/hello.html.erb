@@ -1,0 +1,14 @@
+<p>Hello World!</p>
+
+<%= link_to('Index Page', {:controller => 'demo', :action => 'index'}) %>
+<br />
+<br />
+<%= link_to('URL with parameters', {:controller => 'demo', :action => 'hello', :page => 5, :id => 20}) %><br />
+
+<p>Here are the URL param values:</p>
+ID: <%= @id %><br />
+Page: <%= @page %><br />
+Page_with_direct_params_access: <%= params[:page] %>
+
+<hr />
+<%= params.inspect %>
