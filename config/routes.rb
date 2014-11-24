@@ -1,10 +1,20 @@
 SimpleCms::Application.routes.draw do
+
+
+  get "pages_controller/new"
+
+  get "pages_controller/show"
+
+  get "pages_controller/edit"
+
+  get "pages_controller/delete"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
   # get "demo/index"
   # root "demo#index"
 
-  match ':controller(/:action(/id))', :via => :get
+  match ':controller(/:action(/id))', :via => [:get,:post]
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
