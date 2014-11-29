@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
 
-  layout false
+  # layout false
 
   def index
     @subjects = Subject.sorted

@@ -1,14 +1,5 @@
 SimpleCms::Application.routes.draw do
 
-
-  get "pages_controller/new"
-
-  get "pages_controller/show"
-
-  get "pages_controller/edit"
-
-  get "pages_controller/delete"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
   # get "demo/index"
