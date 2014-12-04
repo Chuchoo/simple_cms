@@ -1,5 +1,7 @@
 class DemoController < ApplicationController
 	
+	layout 'application'
+
 	def hello
 		# render('hello')
 		@id = params['id']
