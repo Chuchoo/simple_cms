@@ -1,5 +1,7 @@
 class AdminUser < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :username
+  attr_accessible :first_name, :last_name, :username, :email
+
+  has_secure_password
 
   # To configure a table name
   # self.table_name = "admin_users"

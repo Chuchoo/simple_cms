@@ -1,6 +1,7 @@
 class SectionsController < ApplicationController
 
   layout 'admin'
+  before_filter :confirm_logged_in
 
   def index
     @sections = Section.sorted
@@ -8,10 +9,14 @@ class SectionsController < ApplicationController
 
   def new
     @section = Section.new
+    @pages = Page.sorted
+    @section_count = Section.count + 1
   end
 
   def edit
     @section = Section.find(params[:id])
+    @pages = Page.sorted
+    @section_count = Section.count
   end
 
   def delete
@@ -29,6 +34,8 @@ class SectionsController < ApplicationController
        flash[:notice] = "Section #{@section.name} is created"
        redirect_to(:action => 'index')
     else
+      @section_count = Section.count + 1
+      @pages = Page.sorted
        render 'new'
     end
   end
@@ -40,6 +47,8 @@ class SectionsController < ApplicationController
        flash[:notice] = "Section #{@section.name} is updated"
        redirect_to(:action => 'show', :id => @section.id)
     else
+      @section_count = Section.count
+      @pages = Page.sorted
        render 'edit'
     end
   end
