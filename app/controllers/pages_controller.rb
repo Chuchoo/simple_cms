@@ -34,7 +34,6 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @subjects = Subject.sorted
     @page_count = Page.count
-
   end
 
   def update
