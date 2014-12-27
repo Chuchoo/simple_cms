@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
 
   layout 'admin'
-  before_filter :confirm_logged_in
+  before_action :confirm_logged_in
 
   def index
     @sections = Section.sorted
@@ -29,7 +29,7 @@ class SectionsController < ApplicationController
 
 
   def create
-    @section = Section.new(params[:section])
+    @section = Section.new(section_params)
     if @section.save
        flash[:notice] = "Section #{@section.name} is created"
        redirect_to(:action => 'index')
@@ -43,7 +43,7 @@ class SectionsController < ApplicationController
 
   def update
     @section = Section.find(params[:id])
-    if @section.update_attributes(params[:section])
+    if @section.update_attributes(section_params)
        flash[:notice] = "Section #{@section.name} is updated"
        redirect_to(:action => 'show', :id => @section.id)
     else
@@ -57,6 +57,12 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id]).destroy
     flash[:notice] = "Section #{@section.name} is deleted."
     redirect_to(:action => 'index')
+  end
+
+  private
+
+  def section_params
+    params.require(:section).permit(:name, :position, :content_type, :content, :visible, :page_id)
   end
 
 end
