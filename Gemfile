@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '4.0.0'
 #added thin webserver to get rid of warning message:
@@ -9,6 +9,9 @@ gem 'thin'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+
+#gem file to manage sort mess we have
+gem 'acts_as_list', '~> 0.3.0'
 
 
 # Gems used only for assets and not required
