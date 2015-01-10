@@ -2,5 +2,8 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Rails simple_cms: development" uuid="95193025-0352-480a-a0bb-869c31e5d668" />
+    <data-source name="Rails simple_cms: production" uuid="4397d728-c96f-4739-b7b3-9c354c5f67c9">
+      <first-sync>true</first-sync>
+    </data-source>
   </component>
 </project>

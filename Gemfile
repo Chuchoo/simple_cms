@@ -1,14 +1,23 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.19'
+gem 'rails', '4.0.0'
 #added thin webserver to get rid of warning message:
 #WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
 gem 'thin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development do
+  gem 'sqlite3'
+end
 
-gem 'sqlite3'
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
+#gem file to manage sort mess we have
+gem 'acts_as_list', '~> 0.3.0'
 
 
 # Gems used only for assets and not required
@@ -24,6 +33,11 @@ gem 'sqlite3'
 # end
 
 # gem 'jquery-rails'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.1'

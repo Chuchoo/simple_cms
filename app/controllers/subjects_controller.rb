@@ -1,7 +1,7 @@
 class SubjectsController < ApplicationController
 
   layout 'admin'
-  before_filter :confirm_logged_in
+  before_action :confirm_logged_in
 
   def index
     @subjects = Subject.sorted
@@ -18,7 +18,7 @@ class SubjectsController < ApplicationController
 
   def create
     #Instantiate a new object using form parameter
-    @subject = Subject.new(params[:subject])
+    @subject = Subject.new(subject_params)
     #Save the object
     if @subject.save
       #If save succeeds, redirect to the index action
@@ -51,7 +51,7 @@ class SubjectsController < ApplicationController
     #Find an existing object using form parameter
     @subject = Subject.find(params[:id])
     #Update the object
-    if @subject.update_attributes(params[:subject])
+    if @subject.update_attributes(subject_params)
       #If update succeeds, redirect to the index action
       flash[:notice] = "Subject #{@subject.name} is updated"
       redirect_to(:action => 'show', :id => @subject.id)
@@ -64,10 +64,10 @@ class SubjectsController < ApplicationController
 
   private
 
-    # def subject_params
-    #   # same as using "params[:subject]", except that it:
-    #   # - raises an error if :subject is not present
-    #   # - allows listed attributes to be mass-assigned
-    #   params.require(:subject).permit(:name,:position,:visible)
-    # end
+    def subject_params
+      # same as using "params[:subject]", except that it:
+      # - raises an error if :subject is not present
+      # - allows listed attributes to be mass-assigned
+      params.require(:subject).permit(:name,:position,:visible)
+    end
 end

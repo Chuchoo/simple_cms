@@ -1,12 +1,19 @@
 SimpleCms::Application.routes.draw do
 
+  # Don't need these auto-generated routes.
+  # We are using default route.
+  #   get "admin_users/index"
+  #   get "admin_users/new"
+  #   get "admin_users/edit"
+  #   get "admin_users/delete"
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-  # get "demo/index"
-  # root "demo#index"
-  get 'admin', :to => 'access#index'
-  match ':controller(/:action(/id))', :via => [:get,:post]
+  root "public#index"
+
+  get 'show/:permalink', :to => 'public#show'
+  get 'admin', :to => "access#index"
+
+  #get "demo/index"
+  match ':controller(/:action(/:id))', :via => [:get, :post]
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

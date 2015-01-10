@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1319511262">
+  <component name="DataSourceManagerImpl" format="xml" hash="315415588">
     <data-source source="LOCAL" name="Rails simple_cms: development" uuid="95193025-0352-480a-a0bb-869c31e5d668">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Sites\simple_cms\simple_cms_development</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails simple_cms: production" uuid="4397d728-c96f-4739-b7b3-9c354c5f67c9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:db/production.postgresql</jdbc-url>
       <libraries />
     </data-source>
   </component>

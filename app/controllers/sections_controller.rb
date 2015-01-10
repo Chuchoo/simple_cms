@@ -1,14 +1,15 @@
 class SectionsController < ApplicationController
 
   layout 'admin'
-  before_filter :confirm_logged_in
+  before_action :confirm_logged_in
+  before_action :find_pages
 
   def index
-    @sections = Section.sorted
+    @sections = @page.sections.sorted
   end
 
   def new
-    @section = Section.new
+    @section = Section.new(:page_id => @page.id)
     @pages = Page.sorted
     @section_count = Section.count + 1
   end
@@ -29,10 +30,10 @@ class SectionsController < ApplicationController
 
 
   def create
-    @section = Section.new(params[:section])
+    @section = Section.new(section_params)
     if @section.save
        flash[:notice] = "Section #{@section.name} is created"
-       redirect_to(:action => 'index')
+       redirect_to(:action => 'index',:page_id => @page.id)
     else
       @section_count = Section.count + 1
       @pages = Page.sorted
@@ -43,9 +44,9 @@ class SectionsController < ApplicationController
 
   def update
     @section = Section.find(params[:id])
-    if @section.update_attributes(params[:section])
+    if @section.update_attributes(section_params)
        flash[:notice] = "Section #{@section.name} is updated"
-       redirect_to(:action => 'show', :id => @section.id)
+       redirect_to(:action => 'show', :id => @section.id,:page_id => @page.id)
     else
       @section_count = Section.count
       @pages = Page.sorted
@@ -54,9 +55,22 @@ class SectionsController < ApplicationController
   end
 
   def destroy
-    @section = Section.find(params[:id]).destroy
-    flash[:notice] = "Section #{@section.name} is deleted."
-    redirect_to(:action => 'index')
+    Section.find(params[:id]).destroy
+    # flash[:notice] = "Section #{@section.name} is deleted."
+    flash[:notice] = 'Section is deleted.'
+    redirect_to(:action => 'index',:page_id => @page.id)
+  end
+
+  private
+
+  def section_params
+    params.require(:section).permit(:name, :position, :content_type, :content, :visible, :page_id)
+  end
+
+  def find_pages
+    if params[:page_id]
+      @page = Page.find(params[:page_id])
+    end
   end
 
 end
