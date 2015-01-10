@@ -7,8 +7,13 @@ gem 'thin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development do
+  gem 'sqlite3'
+end
 
-gem 'sqlite3'
+group :production do
+  gem 'pg'
+end
 
 #gem file to manage sort mess we have
 gem 'acts_as_list', '~> 0.3.0'
