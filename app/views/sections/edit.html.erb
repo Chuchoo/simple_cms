@@ -1,9 +1,9 @@
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", {:action => 'index',:page_id => @page.id}, :class => 'back-link') %>
 
 <div class="pages edit">
   <h2>Update Section</h2>
 
-  <%= form_for(:section, :url => {:action => 'update',:id => @section.id }) do |f| %>
+  <%= form_for(:section, :url => {:action => 'update',:id => @section.id,:page_id => @page.id }) do |f| %>
       <%= error_messages_for(@section) %>
       <table summary="Section form fields">
         <tr>
@@ -20,6 +20,10 @@
             <%= f.radio_button(:content_type, 'text') %> Text
             <%= f.radio_button(:content_type, 'HTML') %> HTML
           </td>
+        </tr>
+        <tr>
+          <th><%= f.label(:content)%></th>
+          <td><%= f.text_field(:content) %></td>
         </tr>
         <tr>
           <th><%= f.label(:position)%></th>

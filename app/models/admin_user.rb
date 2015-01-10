@@ -1,8 +1,5 @@
 class AdminUser < ActiveRecord::Base
 
-  attr_accessor :password
-  attr_accessible :first_name, :last_name, :username, :email, :password
-
   has_secure_password
 
   # To configure a table name
@@ -46,7 +43,9 @@ class AdminUser < ActiveRecord::Base
 
   validate :permitted_to_access
 
-  def permitted_to_access
+  private
+
+   def permitted_to_access
       if FORBIDDEN_USERNAME.include?(username)
         errors.add(:username, "is not allowed to access the site.")
       end

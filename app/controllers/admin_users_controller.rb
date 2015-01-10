@@ -2,7 +2,7 @@ class AdminUsersController < ApplicationController
 
   layout 'admin'
 
-  before_filter :confirm_logged_in
+  before_action :confirm_logged_in
 
   def index
     @admin_users = AdminUser.sorted
@@ -13,7 +13,7 @@ class AdminUsersController < ApplicationController
   end
 
   def create
-    @admin_user = AdminUser.new(params[:admin_user])
+    @admin_user = AdminUser.new(admin_user_params)
     if @admin_user.save
        flash[:notice] = "Admin user created"
        redirect_to(:action => 'index')
@@ -29,7 +29,7 @@ class AdminUsersController < ApplicationController
 
   def update
     @admin_user = AdminUser.find(params[:id])
-    if @admin_user.update_attributes(params[:admin_user])
+    if @admin_user.update_attributes(admin_user_params)
       flash[:notice] = "Admin user #{@admin_user.username} updated."
       redirect_to(:action => 'index')
     else
@@ -51,9 +51,9 @@ class AdminUsersController < ApplicationController
 
   # Below method is used for Rails 4
 
-  # private
-  # def admin_user_params
-  #   params.require(@admin_user).permit(:first_name, :last_name, :username, :email, :password)
-  # end
+  private
+  def admin_user_params
+    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password)
+  end
 
 end

@@ -1,7 +1,12 @@
 class Subject < ActiveRecord::Base
-  attr_accessible :name,:position,:visible
+
+  #delets the related pages automatically whenever subject gets deleted
+  # has_many :pages, :dependent => :destroy
 
   has_many :pages
+
+  acts_as_list
+
 
   validates_presence_of :name
   validates_length_of :name, :maximum => 255

@@ -1,10 +1,13 @@
 class Section < ActiveRecord::Base
-  attr_accessible :name, :position, :content_type, :content, :visible, :page_id
+
   belongs_to :page
   has_many :section_edits
   has_many :editors, :through => :section_edits, :class_name => "AdminUser"
 
-  CONTENT_TYPES = ['text','HTML']
+  acts_as_list :scope => :page
+  after_save :touch_page
+
+  CONTENT_TYPES = ['text', 'HTML']
 
   validates_presence_of :name
   validates_length_of :name, :maximum => 255
@@ -12,6 +15,16 @@ class Section < ActiveRecord::Base
                          :message => "must be one of: #{CONTENT_TYPES.join(', ')}"
   validates_presence_of :content
 
+  scope :visible, lambda { where(:visible => true) }
+  scope :invisible, lambda { where(:visible => false) }
+  scope :sorted, lambda { order("sections.position ASC") }
+  scope :newest_first, lambda { order("sections.created_at DESC")}
 
-  scope :sorted, lambda{order("sections.position ASC")}
+  private
+
+  def touch_page
+    # updates the timestamp_attributes_after save which applies for create and update
+    page.touch
+  end
+
 end
