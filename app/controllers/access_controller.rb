@@ -5,9 +5,11 @@ class AccessController < ApplicationController
   before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
 
   def index
+    #displays text and links
   end
 
   def login
+    #displays login form
   end
 
   def attempt_login

@@ -8,9 +8,11 @@ class AdminUsersController < ApplicationController
     @admin_users = AdminUser.sorted
   end
 
+
   def new
     @admin_user = AdminUser.new
   end
+
 
   def create
     @admin_user = AdminUser.new(admin_user_params)
@@ -27,6 +29,7 @@ class AdminUsersController < ApplicationController
     @admin_user = AdminUser.find(params[:id])
   end
 
+
   def update
     @admin_user = AdminUser.find(params[:id])
     if @admin_user.update_attributes(admin_user_params)
@@ -36,7 +39,6 @@ class AdminUsersController < ApplicationController
       render('edit')
     end
   end
-
 
   def delete
     @admin_user = AdminUser.find(params[:id])
@@ -53,7 +55,7 @@ class AdminUsersController < ApplicationController
 
   private
   def admin_user_params
-    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password)
+    params.require(:admin_user).permit(:first_name, :last_name, :username, :email, :password,:password_confirmation)
   end
 
 end
